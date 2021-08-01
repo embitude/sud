@@ -1,0 +1,41 @@
+From 940da8ced1426fe2976679f3d487d814d67b5fcd Mon Sep 17 00:00:00 2001
+From: Pradeep Tewani <info@embitude.in>
+Date: Mon, 1 Feb 2021 21:23:25 +0530
+Subject: [PATCH] Patch for SPI and UART sessions
+
+---
+ arch/arm/mach-omap2/omap_hwmod_33xx_43xx_ipblock_data.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-omap2/omap_hwmod_33xx_43xx_ipblock_data.c b/arch/arm/mach-omap2/omap_hwmod_33xx_43xx_ipblock_data.c
+index 3b8fe014a..297a51e57 100644
+--- a/arch/arm/mach-omap2/omap_hwmod_33xx_43xx_ipblock_data.c
++++ b/arch/arm/mach-omap2/omap_hwmod_33xx_43xx_ipblock_data.c
+@@ -886,6 +886,7 @@ struct omap_hwmod am33xx_spi0_hwmod = {
+ 	.name		= "spi0",
+ 	.class		= &am33xx_spi_hwmod_class,
+ 	.clkdm_name	= "l4ls_clkdm",
++	.flags		= HWMOD_NO_IDLE,
+ 	.main_clk	= "dpll_per_m2_div4_ck",
+ 	.prcm		= {
+ 		.omap4	= {
+@@ -899,6 +900,7 @@ struct omap_hwmod am33xx_spi1_hwmod = {
+ 	.name		= "spi1",
+ 	.class		= &am33xx_spi_hwmod_class,
+ 	.clkdm_name	= "l4ls_clkdm",
++	.flags		= HWMOD_NO_IDLE,
+ 	.main_clk	= "dpll_per_m2_div4_ck",
+ 	.prcm		= {
+ 		.omap4	= {
+@@ -1167,7 +1169,7 @@ struct omap_hwmod am33xx_uart2_hwmod = {
+ 	.name		= "uart2",
+ 	.class		= &uart_class,
+ 	.clkdm_name	= "l4ls_clkdm",
+-	.flags		= HWMOD_SWSUP_SIDLE_ACT,
++	.flags		= HWMOD_SWSUP_SIDLE_ACT | HWMOD_INIT_NO_IDLE,
+ 	.main_clk	= "dpll_per_m2_div4_ck",
+ 	.prcm		= {
+ 		.omap4	= {
+-- 
+2.17.1
+
